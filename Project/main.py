@@ -5,11 +5,7 @@ import numpy as np
 from preprocessing import preprocess_data
 from random_forest import train
 from matrices import plot_confusion_matrix
-
-# ----- MODEL SETTINGS -----
-PREPROCESSING = True
-TRAIN_MODEL = False
-VALIDATION_CURVE = False
+from analysis_plots import plot_metrics_vs_ppc
 
 # ----- MATRICES SETTINGS -----
 GENERATE_MATRICES = True
@@ -55,6 +51,10 @@ if __name__ == '__main__':
             print(f"{GREEN}Generuję macierze pomyłek {ppc}x{ppc}...{RESET}")
             plot_confusion_matrix(X, y, emotions_map, ppc)
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
+
+        # Wywołanie wykresu zbiorczego po zakoczeniu pętli
+        print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
+        plot_metrics_vs_ppc(results, PPC)
 
     if GENERATE_MATRICES and ONLY_FOR_8x8:
         print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")

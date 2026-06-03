@@ -16,11 +16,11 @@ def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt=".2f", cmap="Blues",
                 xticklabels=class_names, yticklabels=class_names,
-                cbar_kws={'label': 'Odsetek predykcji'})
+                cbar_kws={'label': 'Prediction Proportion'})
 
-    plt.title(f"Znormalizowana Macierz Pomyłek (Random Forest, PPC={ppc}x{ppc})", fontsize=14, pad=15)
-    plt.ylabel("Prawdziwa emocja (True Label)", fontsize=12, fontweight='bold')
-    plt.xlabel("Przewidziana emocja (Predicted Label)", fontsize=12, fontweight='bold')
+    plt.title(f"Normalized Confusion Matrix (Random Forest, PPC={ppc}x{ppc})", fontsize=14, pad=15)
+    plt.ylabel("True Emotion (True Label)", fontsize=12, fontweight='bold')
+    plt.xlabel("Predicted Emotion (Predicted Label)", fontsize=12, fontweight='bold')
 
     plt.tight_layout()
     plt.show()
