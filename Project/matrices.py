@@ -18,7 +18,7 @@ def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
                 xticklabels=class_names, yticklabels=class_names,
                 cbar_kws={'label': 'Prediction Proportion'})
 
-    plt.title(f"Normalized Confusion Matrix (Random Forest, PPC={ppc}x{ppc})", fontsize=14, pad=15)
+    plt.title(f"Normalized Confusion Matrix (Random Forest, PPC={ppc}×{ppc})", fontsize=14, pad=15)
     plt.ylabel("True Emotion (True Label)", fontsize=12, fontweight='bold')
     plt.xlabel("Predicted Emotion (Predicted Label)", fontsize=12, fontweight='bold')
 

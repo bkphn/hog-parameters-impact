@@ -52,9 +52,8 @@ if __name__ == '__main__':
             plot_confusion_matrix(X, y, emotions_map, ppc)
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
-        # Wywołanie wykresu zbiorczego po zakoczeniu pętli
-        print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
-        plot_metrics_vs_ppc(results, PPC)
+    print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
+    plot_metrics_vs_ppc(results, PPC)
 
     if GENERATE_MATRICES and ONLY_FOR_8x8:
         print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")
