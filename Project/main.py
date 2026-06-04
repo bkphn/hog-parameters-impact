@@ -25,7 +25,7 @@ if __name__ == '__main__':
     emotions_map = {"anger": 0, "contempt": 1, "disgust": 2,
                     "fear": 3, "happy": 4, "sadness": 5, "surprise": 6}
 
-    PPC = [2, 4, 6, 8, 10, 12, 14, 16]
+    PPC = [2, 4, 6, 8, 12, 16]
     results = {}
 
     for ppc in PPC:
