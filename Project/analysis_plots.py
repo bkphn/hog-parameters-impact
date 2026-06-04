@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 
 def plot_metrics_vs_ppc(results, ppc_values):
@@ -37,6 +38,11 @@ def plot_metrics_vs_ppc(results, ppc_values):
     ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
               ncol=3, frameon=False, fontsize=11)
 
-    plt.title('Classification Metrics and Fit Time by PPC Configuration', fontsize=14, pad=15)
     plt.tight_layout()
+
+    output_dir = "Figures"
+    os.makedirs(output_dir, exist_ok=True)
+    save_path = os.path.join(output_dir, f"chart.pdf")
+    plt.savefig(save_path, format='pdf', bbox_inches='tight')
+
     plt.show()

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -18,9 +19,14 @@ def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
                 xticklabels=class_names, yticklabels=class_names,
                 cbar_kws={'label': 'Prediction Proportion'})
 
-    plt.title(f"Normalized Confusion Matrix (Random Forest, PPC={ppc}×{ppc})", fontsize=14, pad=15)
-    plt.ylabel("True Emotion (True Label)", fontsize=12, fontweight='bold')
-    plt.xlabel("Predicted Emotion (Predicted Label)", fontsize=12, fontweight='bold')
+    plt.ylabel("True Emotion", fontsize=12, fontweight='bold', labelpad=25)
+    plt.xlabel("Predicted Emotion", fontsize=12, fontweight='bold', labelpad=25)
 
     plt.tight_layout()
+
+    output_dir = "Figures"
+    os.makedirs(output_dir, exist_ok=True)
+    save_path = os.path.join(output_dir, f"confusion.pdf")
+    plt.savefig(save_path, format='pdf', bbox_inches='tight')
+
     plt.show()

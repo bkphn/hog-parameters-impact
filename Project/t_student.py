@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -23,14 +24,15 @@ ax = sns.boxplot(x='Model', y='F1-Score (%)', data=df,
 sns.stripplot(x='Model', y='F1-Score (%)', data=df,
               color="white", edgecolor="black", linewidth=1, size=8, jitter=False)
 
-plt.title('F1-Score Distribution in 5-Fold Cross-Validation (PPC=8)', fontsize=14, pad=15)
 plt.ylabel('F1-Score (%)', fontsize=12)
 plt.xlabel('Class Weight Configuration', fontsize=12)
 plt.ylim(50, 80)
 
-plt.text(0.5, 78, 'p-value = 0.50 (No statistical significance)',
-         horizontalalignment='center', fontsize=11,
-         bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'))
-
 plt.tight_layout()
+
+output_dir = "Figures"
+os.makedirs(output_dir, exist_ok=True)
+save_path = os.path.join(output_dir, f"t_student.pdf")
+plt.savefig(save_path, format='pdf', bbox_inches='tight')
+
 plt.show()
