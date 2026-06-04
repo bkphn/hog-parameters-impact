@@ -6,6 +6,16 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import cross_val_predict
 from sklearn.ensemble import RandomForestClassifier
 
+# ----- FONT SETTINGS -----
+plt.rcParams.update({
+    'font.size': 10,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 11,
+    'axes.titlesize': 14
+})
+
 
 def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
     class_names = list(emotions_map.keys())
@@ -19,8 +29,8 @@ def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
                 xticklabels=class_names, yticklabels=class_names,
                 cbar_kws={'label': 'Prediction Proportion'})
 
-    plt.ylabel("True Emotion", fontsize=12, fontweight='bold', labelpad=25)
-    plt.xlabel("Predicted Emotion", fontsize=12, fontweight='bold', labelpad=25)
+    plt.ylabel("True Emotion", fontweight='bold', labelpad=25)
+    plt.xlabel("Predicted Emotion", fontweight='bold', labelpad=25)
 
     plt.tight_layout()
 
