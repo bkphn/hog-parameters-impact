@@ -6,6 +6,7 @@ from preprocessing import preprocess_data
 from random_forest import train
 from matrices import plot_confusion_matrix
 from analysis_plots import plot_metrics_vs_ppc
+from svc import train_svc
 
 # ----- MATRICES SETTINGS -----
 GENERATE_MATRICES = True
@@ -27,6 +28,7 @@ if __name__ == '__main__':
 
     PPC = [2, 4, 6, 8, 12, 16]
     results = {}
+    results_svc = {}
 
     for ppc in PPC:
         print(f"{GREEN}Rozpoczynam ekstrakcję cech HOG dla {ppc}x{ppc}...\n{RESET}")
@@ -38,14 +40,26 @@ if __name__ == '__main__':
         print(f"{GREEN}Rozpoczynam klasyfikację lasem losowym dla {ppc}x{ppc}...{RESET}")
         metrics = train(X, y)
         results[ppc] = metrics
-        print(f"{GREEN}Zakończono klasyfikację.{RESET}")
+        print(f"{GREEN}Zakończono klasyfikację lasem losowym.{RESET}")
 
-        print(f"\n--- REZULTATY DLA {ppc}x{ppc} ---")
+        print(f"{GREEN}Rozpoczynam klasyfikację Support Vector Classification dla {ppc}x{ppc}...{RESET}")
+        metrics_svc = train_svc(X, y)
+        results_svc[ppc] = metrics_svc
+        print(f"{GREEN}Zakończono klasyfikację SVC.{RESET}")
+
+        print(f"\n--- REZULTATY DLA RF {ppc}x{ppc} ---")
         print(f"Accuracy:  {metrics['test_accuracy'].mean() * 100:.2f}%")
         print(f"Precision: {metrics['test_precision_macro'].mean() * 100:.2f}%")
         print(f"Recall:    {metrics['test_recall_macro'].mean() * 100:.2f}%")
         print(f"F1:        {metrics['test_f1_macro'].mean() * 100:.2f}%")
         print(f"Czas:      {metrics['fit_time'].mean():.4f} s")
+
+        print(f"\n--- REZULTATY DLA SVC {ppc}x{ppc} ---")
+        print(f"Accuracy:  {metrics_svc['test_accuracy'].mean() * 100:.2f}%")
+        print(f"Precision: {metrics_svc['test_precision_macro'].mean() * 100:.2f}%")
+        print(f"Recall:    {metrics_svc['test_recall_macro'].mean() * 100:.2f}%")
+        print(f"F1:        {metrics_svc['test_f1_macro'].mean() * 100:.2f}%")
+        print(f"Czas:      {metrics_svc['fit_time'].mean():.4f} s")
 
         if GENERATE_MATRICES and not ONLY_FOR_8x8:
             print(f"{GREEN}Generuję macierze pomyłek {ppc}x{ppc}...{RESET}")
@@ -53,7 +67,7 @@ if __name__ == '__main__':
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
     print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
-    plot_metrics_vs_ppc(results, PPC)
+    plot_metrics_vs_ppc(results, results_svc, PPC)
 
     if GENERATE_MATRICES and ONLY_FOR_8x8:
         print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")
