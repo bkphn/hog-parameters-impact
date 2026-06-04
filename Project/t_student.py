@@ -15,11 +15,13 @@ sns.set_theme(style="whitegrid")
 plt.figure(figsize=(8, 6))
 
 ax = sns.boxplot(x='Model', y='F1-Score (%)', data=df,
-                 width=0.5, palette="Set2", showmeans=True,
+                 width=0.5, palette="YlGnBu", showmeans=True,
                  meanprops={"marker":"^", "markerfacecolor":"white",
-                            "markeredgecolor":"black", "markersize":"10"})
+                            "markeredgecolor":"black", "markersize":"10"},
+                 hue='Model', legend=False)
 
-sns.swarmplot(x='Model', y='F1-Score (%)', data=df, color=".25", size=8)
+sns.stripplot(x='Model', y='F1-Score (%)', data=df,
+              color="white", edgecolor="black", linewidth=1, size=8, jitter=False)
 
 plt.title('F1-Score Distribution in 5-Fold Cross-Validation (PPC=8)', fontsize=14, pad=15)
 plt.ylabel('F1-Score (%)', fontsize=12)
