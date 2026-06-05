@@ -4,6 +4,7 @@ from preprocessing import preprocess_data
 from random_forest import train
 from matrices import plot_confusion_matrix
 from analysis_plots import plot_metrics_vs_ppc
+from t_student import perform_statistical_analysis, plot_svc_boxplot, plot_rf_boxplot
 from svc import train_svc
 
 # ----- MATRICES SETTINGS -----
@@ -25,7 +26,7 @@ if __name__ == '__main__':
                     "fear": 3, "happy": 4, "sadness": 5, "surprise": 6}
 
     PPC = [2, 4, 6, 8, 12, 16]
-    results = {}
+    results_rf = {}
     results_svc = {}
 
     for ppc in PPC:
@@ -36,8 +37,8 @@ if __name__ == '__main__':
         print(f"{GREEN}Ekstrakcja cech zakończona pomyślnie.{RESET}")
 
         print(f"{GREEN}Rozpoczynam klasyfikację lasem losowym dla {ppc}x{ppc}...{RESET}")
-        metrics = train(X, y)
-        results[ppc] = metrics
+        metrics_rf = train(X, y)
+        results_rf[ppc] = metrics_rf
         print(f"{GREEN}Zakończono klasyfikację lasem losowym.{RESET}")
 
         print(f"{GREEN}Rozpoczynam klasyfikację Support Vector Classification dla {ppc}x{ppc}...{RESET}")
@@ -46,11 +47,11 @@ if __name__ == '__main__':
         print(f"{GREEN}Zakończono klasyfikację SVC.{RESET}")
 
         print(f"\n--- REZULTATY DLA RF {ppc}x{ppc} ---")
-        print(f"Accuracy:  {metrics['test_accuracy'].mean() * 100:.2f}%")
-        print(f"Precision: {metrics['test_precision_macro'].mean() * 100:.2f}%")
-        print(f"Recall:    {metrics['test_recall_macro'].mean() * 100:.2f}%")
-        print(f"F1:        {metrics['test_f1_macro'].mean() * 100:.2f}%")
-        print(f"Czas:      {metrics['fit_time'].mean():.4f} s")
+        print(f"Accuracy:  {metrics_rf['test_accuracy'].mean() * 100:.2f}%")
+        print(f"Precision: {metrics_rf['test_precision_macro'].mean() * 100:.2f}%")
+        print(f"Recall:    {metrics_rf['test_recall_macro'].mean() * 100:.2f}%")
+        print(f"F1:        {metrics_rf['test_f1_macro'].mean() * 100:.2f}%")
+        print(f"Czas:      {metrics_rf['fit_time'].mean():.4f} s")
 
         print(f"\n--- REZULTATY DLA SVC {ppc}x{ppc} ---")
         print(f"Accuracy:  {metrics_svc['test_accuracy'].mean() * 100:.2f}%")
@@ -64,10 +65,16 @@ if __name__ == '__main__':
             plot_confusion_matrix(X, y, emotions_map, ppc)
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
-    print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
-    plot_metrics_vs_ppc(results, results_svc, PPC)
+        if GENERATE_MATRICES and ONLY_FOR_8x8 and ppc == 8:
+            print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")
+            plot_confusion_matrix(X, y, emotions_map, 8)
+            print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
-    if GENERATE_MATRICES and ONLY_FOR_8x8:
-        print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")
-        plot_confusion_matrix(X, y, emotions_map, 8)
-        print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
+    print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")
+    plot_metrics_vs_ppc(results_rf, results_svc, PPC)
+
+    print(f"{GREEN}Przeprowadzam test t-studenta...{RESET}")
+    perform_statistical_analysis(results_rf, results_svc)
+    plot_rf_boxplot(results_rf)
+    plot_svc_boxplot(results_svc)
+    print(f"Test przeprowadzono pomyślnie.{RESET}")

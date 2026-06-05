@@ -49,7 +49,7 @@ def plot_metrics_vs_ppc(results, results_svc, ppc_values):
     ax.grid(True, linestyle='--', alpha=0.4)
 
     ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
-              ncol=3, frameon=False)
+              ncol=2, frameon=False)
 
     plt.tight_layout()
 
