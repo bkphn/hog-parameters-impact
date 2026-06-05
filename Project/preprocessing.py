@@ -1,8 +1,6 @@
 import os
-from skimage import exposure
 from skimage import io
 from skimage.feature import hog
-import numpy as np
 
 RED = '\033[91m \x1B[3m'
 YELLOW = '\033[93m \x1B[3m'
