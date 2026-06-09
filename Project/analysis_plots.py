@@ -29,14 +29,14 @@ def plot_metrics_vs_ppc(results, results_svc, ppc_values):
 
     x_pos = range(len(ppc_values))
 
-    ax.plot(x_pos, accuracies, marker='o', linestyle='-', color=color_acc,
+    ax.plot(x_pos, accuracies, marker='s', linestyle='--', color=color_acc,
             linewidth=2, label='RF Accuracy')
-    ax.plot(x_pos, f1_scores, marker='s', linestyle='--', color=color_f1,
+    ax.plot(x_pos, f1_scores, marker='o', linestyle='-', color=color_f1,
             linewidth=2, label='RF F1-Score')
 
-    ax.plot(x_pos, accuracies_svc, marker='o', linestyle='-', color=color_acc_svc,
+    ax.plot(x_pos, accuracies_svc, marker='s', linestyle='--', color=color_acc_svc,
             linewidth=2, label='SVC Accuracy')
-    ax.plot(x_pos, f1_scores_svc, marker='s', linestyle='--', color=color_f1_svc,
+    ax.plot(x_pos, f1_scores_svc, marker='o', linestyle='-', color=color_f1_svc,
             linewidth=2, label='SVC F1-Score')
 
     ax.set_xlabel('Pixels Per Cell (PPC)')
