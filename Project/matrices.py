@@ -2,7 +2,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import cross_val_predict
+from sklearn.model_selection import cross_val_predict, GroupKFold
 from sklearn.ensemble import RandomForestClassifier
 
 # ----- FONT SETTINGS -----
@@ -16,10 +16,10 @@ plt.rcParams.update({
 })
 
 
-def plot_confusion_matrix(X, y, emotions_map, ppc, cv_folds=5, random_state=7):
+def plot_confusion_matrix(X, y, groups, emotions_map, ppc, cv_folds=5, random_state=7):
     class_names = list(emotions_map.keys())
     model = RandomForestClassifier(n_estimators=100, n_jobs=5, random_state=random_state)
-    y_pred = cross_val_predict(model, X, y, cv=cv_folds)
+    y_pred = cross_val_predict(model, X, y, groups=groups, cv=GroupKFold(n_splits=cv_folds))
 
     cm = confusion_matrix(y, y_pred, normalize='true')
 

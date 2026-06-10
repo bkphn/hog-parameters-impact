@@ -20,6 +20,8 @@ def preprocess_image(image_path):
 def preprocess_data(emotions_map, path, ppc):
     features = []
     labels = []
+    groups = []
+
     for emotion_name, emotion_label in emotions_map.items():
         emotion_path = os.path.join(path, emotion_name)
 
@@ -31,8 +33,12 @@ def preprocess_data(emotions_map, path, ppc):
             if filename.endswith(".png"):
                 image_path = os.path.join(emotion_path, filename)
 
+                parts = filename.split('_')
+                group_id = f"{parts[0]}_{parts[1]}"
+
                 processed_image = preprocess_image(image_path)
                 features.append(extract_features(processed_image, ppc))
                 labels.append(emotion_label)
+                groups.append(group_id)
 
-    return features, labels
+    return features, labels, groups

@@ -31,18 +31,19 @@ if __name__ == '__main__':
 
     for ppc in PPC:
         print(f"{GREEN}Rozpoczynam ekstrakcję cech HOG dla {ppc}x{ppc}...\n{RESET}")
-        features, labels = preprocess_data(emotions_map, DATA_PATH, ppc)
+        features, labels, groups = preprocess_data(emotions_map, DATA_PATH, ppc)
         X = np.array(features, dtype=np.float32)
         y = np.array(labels, dtype=np.float32)
+        groups = np.array(groups)
         print(f"{GREEN}Ekstrakcja cech zakończona pomyślnie.{RESET}")
 
         print(f"{GREEN}Rozpoczynam klasyfikację lasem losowym dla {ppc}x{ppc}...{RESET}")
-        metrics_rf = train(X, y)
+        metrics_rf = train(X, y, groups)
         results_rf[ppc] = metrics_rf
         print(f"{GREEN}Zakończono klasyfikację lasem losowym.{RESET}")
 
         print(f"{GREEN}Rozpoczynam klasyfikację Support Vector Classification dla {ppc}x{ppc}...{RESET}")
-        metrics_svc = train_svc(X, y)
+        metrics_svc = train_svc(X, y, groups)
         results_svc[ppc] = metrics_svc
         print(f"{GREEN}Zakończono klasyfikację SVC.{RESET}")
 
@@ -62,12 +63,12 @@ if __name__ == '__main__':
 
         if GENERATE_MATRICES and not ONLY_FOR_8x8:
             print(f"{GREEN}Generuję macierze pomyłek {ppc}x{ppc}...{RESET}")
-            plot_confusion_matrix(X, y, emotions_map, ppc)
+            plot_confusion_matrix(X, y, groups, emotions_map, ppc)
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
         if GENERATE_MATRICES and ONLY_FOR_8x8 and ppc == 8:
             print(f"{GREEN}Generuję macierz pomyłek {ppc}x{ppc}...{RESET}")
-            plot_confusion_matrix(X, y, emotions_map, 8)
+            plot_confusion_matrix(X, y, groups, emotions_map, 8)
             print(f"{GREEN}Macierz pomyłek wygenerowanie pomyślnie.{RESET}")
 
     print(f"{GREEN}Generuję wykres zbiorczy analizy wpływu PPC...{RESET}")

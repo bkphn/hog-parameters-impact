@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_validate
+from sklearn.model_selection import cross_validate, GroupKFold
 
-def train(X, y, n_estimators = 100, cv_folds = 5, class_weight=None):
+def train(X, y, groups, n_estimators = 100, cv_folds = 5, class_weight=None):
     model = RandomForestClassifier(
         n_estimators = n_estimators,
         n_jobs = 5,
@@ -13,7 +13,8 @@ def train(X, y, n_estimators = 100, cv_folds = 5, class_weight=None):
         estimator = model,
         X = X,
         y = y,
-        cv = cv_folds,
+        groups = groups,
+        cv = GroupKFold(n_splits=cv_folds),
         scoring = ['accuracy', 'precision_macro', 'recall_macro', 'f1_macro'],
         return_train_score = False
     )
