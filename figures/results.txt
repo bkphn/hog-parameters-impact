@@ -1,0 +1,97 @@
+--- REZULTATY DLA RF 2x2 ---
+Accuracy:  73.08%
+Precision: 60.55%
+Recall:    57.32%
+F1:        52.39%
+Czas:      0.3908 s
+
+--- REZULTATY DLA SVC 2x2 ---
+Accuracy:  81.33%
+Precision: 79.40%
+Recall:    73.63%
+F1:        72.33%
+Czas:      59.8482 s
+ Rozpoczynam ekstrakcję cech HOG dla 4x4...
+
+
+--- REZULTATY DLA RF 4x4 ---
+Accuracy:  74.82%
+Precision: 65.09%
+Recall:    58.72%
+F1:        53.93%
+Czas:      0.3159 s
+
+--- REZULTATY DLA SVC 4x4 ---
+Accuracy:  86.95%
+Precision: 84.56%
+Recall:    81.74%
+F1:        80.46%
+Czas:      0.4119 s
+
+
+--- REZULTATY DLA RF 6x6 ---
+Accuracy:  75.63%
+Precision: 70.94%
+Recall:    61.63%
+F1:        56.98%
+Czas:      0.2448 s
+
+--- REZULTATY DLA SVC 6x6 ---
+Accuracy:  84.01%
+Precision: 79.22%
+Recall:    77.69%
+F1:        75.62%
+Czas:      0.0870 s
+
+
+--- REZULTATY DLA RF 8x8 ---
+Accuracy:  74.11%
+Precision: 65.63%
+Recall:    59.60%
+F1:        57.61%
+Czas:      0.2074 s
+
+--- REZULTATY DLA SVC 8x8 ---
+Accuracy:  83.88%
+Precision: 78.04%
+Recall:    77.62%
+F1:        76.17%
+Czas:      0.0421 s
+
+
+--- REZULTATY DLA RF 12x12 ---
+Accuracy:  68.19%
+Precision: 49.91%
+Recall:    52.18%
+F1:        48.28%
+Czas:      0.1725 s
+
+--- REZULTATY DLA SVC 12x12 ---
+Accuracy:  72.15%
+Precision: 57.50%
+Recall:    58.85%
+F1:        56.39%
+Czas:      0.0195 s
+
+
+--- REZULTATY DLA RF 16x16 ---
+Accuracy:  63.40%
+Precision: 49.44%
+Recall:    47.48%
+F1:        44.40%
+Czas:      0.1510 s
+
+--- REZULTATY DLA SVC 16x16 ---
+Accuracy:  67.07%
+Precision: 58.07%
+Recall:    52.60%
+F1:        50.45%
+Czas:      0.0147 s
+
+1. Wpływ PPC na Random Forest (8x8 vs 16x16)
+p-value: 0.0029
+Wynik istotny statystycznie.
+
+2. Wpływ PPC na SVC (8x8 vs 16x16)
+p-value: 0.0002
+Wynik istotny statystycznie.

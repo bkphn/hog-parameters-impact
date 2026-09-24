@@ -1,0 +1,7 @@
+# Środowisko wirtualne i IDE
+.venv/
+.idea/
+
+# Pliki tymczasowe Pythona
+__pycache__/
+*.pyc
